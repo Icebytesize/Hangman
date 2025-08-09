@@ -37,10 +37,40 @@ namespace Hangman.Utils
             Settings.gætTilbage = 7;
             Settings.HentOrdListe();
             Settings.GenererOrd();
+            Settings.gættedeBogstaver = new string('_', Settings.genereretOrd.Length);
             while(Settings.spilKøre)
             {
                 Message.SpilSkærm();
+                Settings.gættetOrd = Console.ReadLine();
+                if (Settings.forkerteGæt.Contains(Settings.gættetOrd) || Settings.gættedeBogstaver.Contains(Settings.gættetOrd))
+                {
+                    Message.BogstavAlleredeBrugt();
+                }
 
+                else if (Settings.genereretOrd.Contains(Settings.gættetOrd))
+                {
+                    KorrektBogstav();
+                }
+
+                else if (!Settings.genereretOrd.Contains(Settings.gættetOrd))
+                {
+                    ForketBogstav();
+                }
+
+                else
+                {
+                    Message.ErrorMessage();
+                }
+
+                if (Settings.gættetOrd == Settings.genereretOrd)
+                {
+                    VundetSpil();
+                }
+
+                if (Settings.gætTilbage == 0)
+                {
+                    TabtSpil();
+                }
 
             }
         }

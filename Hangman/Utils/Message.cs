@@ -52,6 +52,9 @@ namespace Hangman.Utils
 
         public static void SpilSkærm()
         {
+            Console.Clear();
+            Console.WriteLine($"Du har {Settings.gætTilbage} gæt tilbage\n\n");
+
             Console.WriteLine("  _______");
             Console.WriteLine("  |     |");
 
@@ -83,6 +86,16 @@ namespace Hangman.Utils
 
             Console.WriteLine("        |");
             Console.WriteLine("_______|_");
+
+            Console.WriteLine($"\n\nDet rigtige ord: {Settings.genereretOrd}        Forkerte bogstaver: {Settings.forkerteGæt}");
+            Console.Write("Indtast det bogstav du vil gætte på > ");
+        }
+
+        public static void BogstavAlleredeBrugt()
+        {
+            Console.Clear();
+            Console.WriteLine("Bogstav allerede brugt, prøv igen");
+            Console.ReadKey();
         }
     }
 }
