@@ -38,11 +38,13 @@ namespace Hangman.Utils
             Settings.HentOrdListe();
             Settings.GenererOrd();
             Settings.gættedeBogstaver = new string('_', Settings.genereretOrd.Length);
+            Settings.gættedeBogstaverChar = Settings.gættedeBogstaver.ToCharArray();
             while(Settings.spilKøre)
             {
                 Message.SpilSkærm();
-                Settings.gættetOrd = Console.ReadLine();
-                if (Settings.forkerteGæt.Contains(Settings.gættetOrd) || Settings.gættedeBogstaver.Contains(Settings.gættetOrd))
+                Settings.gættetOrd = Console.ReadLine().ToLower();
+                char gæt = Settings.gættetOrd[0];
+                if (Settings.forkertGættedeBogstaver.Contains(gæt) || Settings.gættedeBogstaver.Contains(gæt))
                 {
                     Message.BogstavAlleredeBrugt();
                 }
@@ -54,7 +56,7 @@ namespace Hangman.Utils
 
                 else if (!Settings.genereretOrd.Contains(Settings.gættetOrd))
                 {
-                    ForketBogstav();
+                    ForkertBogstav();
                 }
 
                 else
@@ -85,6 +87,41 @@ namespace Hangman.Utils
             int.TryParse(Console.ReadLine(), out input);
             if (input >= 4 && input <= 6) Settings.Sværhedsgrad = input;
             else Message.ErrorMessage();
+        }
+
+        public static void KorrektBogstav()
+        {
+            for (int i = 0; i < Settings.genereretOrd.Length; i++)
+            { 
+                if (Settings.gættetOrd[0] == Settings.genereretOrd[i])
+                {
+                    Settings.gættedeBogstaverChar[i] = Settings.gættetOrd[0];
+                    Settings.gættedeBogstaver = new string(Settings.gættedeBogstaverChar);
+                }
+            }
+        }
+
+        public static void ForkertBogstav()
+        {
+            Settings.forkertGættedeBogstaver = Settings.forkertGættedeBogstaver + $"{Settings.gættetOrd} ";
+            Settings.gætTilbage--;
+        }
+
+        public static void VundetSpil()
+        {
+            Console.Clear();
+            Console.WriteLine($"Tilykke du har vundet spillet med {Settings.gætTilbage} gæt tilbage");
+            Console.ReadKey();
+            Settings.spilKøre = false;
+        }
+
+        public static void TabtSpil()
+        {
+            Console.Clear();
+            Console.WriteLine("Du har desværre tabt spillet og vil nu blive sendt tilbage til menuen");
+            Console.ReadKey();
+            Settings.spilKøre = false;
+
         }
 
     }

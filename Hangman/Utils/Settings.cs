@@ -9,7 +9,8 @@ namespace Hangman.Utils
 {
     internal class Settings
     {
-        public static string genereretOrd, gættetOrd, forkerteGæt, gættedeBogstaver, forkertGættedeBogstaver; 
+        public static string genereretOrd, gættetOrd, forkerteGæt = "", gættedeBogstaver = "", forkertGættedeBogstaver = "";
+        public static char[] gættedeBogstaverChar;
         public static int Sværhedsgrad = 4, gætTilbage;
         public static bool programKøre = true, spilKøre = true;
         public static List<string> ordListe;

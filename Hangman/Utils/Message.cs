@@ -72,22 +72,22 @@ namespace Hangman.Utils
             else
                 Console.WriteLine("        |");
 
-            if (Settings.gætTilbage >= 2)
+            if (Settings.gætTilbage <= 2)
                 Console.WriteLine("  |     |"); // mave/stamme
             else
                 Console.WriteLine("        |");
 
             if (Settings.gætTilbage == 1)
                 Console.WriteLine(" /      |"); // et ben
-            else if (Settings.gætTilbage >= 0)
+            else if (Settings.gætTilbage <= 0)
                 Console.WriteLine(" / \\    |"); // to ben
             else
                 Console.WriteLine("        |");
 
             Console.WriteLine("        |");
-            Console.WriteLine("_______|_");
+            Console.WriteLine(" _______|_");
 
-            Console.WriteLine($"\n\nDet rigtige ord: {Settings.genereretOrd}        Forkerte bogstaver: {Settings.forkerteGæt}");
+            Console.WriteLine($"\n\nDet rigtige ord: {Settings.gættedeBogstaver}        Forkerte bogstaver: {Settings.forkertGættedeBogstaver}");
             Console.Write("Indtast det bogstav du vil gætte på > ");
         }
 
